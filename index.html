@@ -28,12 +28,12 @@
 						<span>{{ idx + 1 }}</span> {{ step.title }}
 					</li>
         </ul>
-        <div v-if="activeIndex < 5">
-          <button class="btn" :disabled="activeIndex === 0" @click="prev">Назад</button>
-          <button class="btn primary" @click="nextOrFinish" autofocus>{{ btnText }}</button>
-				</div>
-				<div v-else>
-					<button class="btn" @click="reset">Начать заново</button>
+        <div>
+          <button v-if="activeIndex < 5" class="btn" :disabled="activeIndex === 0" @click="prev">{{ btnPrevText }}</button>
+          <button :class="{
+						btn: true,
+						primary: activeIndex < 5
+					}" @click="nextOrFinish" autofocus>{{ btnNextText }}</button>
 				</div>
       </div>
     </div>

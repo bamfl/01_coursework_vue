@@ -13,7 +13,8 @@ const App = {
         {title: 'Vuex', text: 'В блоке вы узнаете абсолютно все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Все на практике.'},
         {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'}
 			],
-			btnText: 'Вперед'
+			btnPrevText: 'Назад',
+			btnNextText: 'Вперед'
     }
   },
   methods: {
@@ -28,22 +29,21 @@ const App = {
 			// кнопка вперед или закончить
 			if (this.activeIndex < 5) {
 				this.activeIndex++
+			} else {
+				//reset
+				this.activeIndex = 0
 			}
-		},
-		reset() {
-			// начать заново
-			this.activeIndex = 0
-		},
-		keyupEnter(event) {
-			this.nextOrFinish()
 		}
 	},
 	watch: {
 		activeIndex() {
-			if (this.activeIndex === 4) {
-				this.btnText = 'Закончить'
+			if (this.activeIndex === 5) {
+				this.btnNextText = 'Начать заново'
+			} else if (this.activeIndex === 4) {
+				this.btnNextText = 'Закончить'
 			} else {
-				this.btnText = 'Вперед'
+				this.btnPrevText = 'Назад'
+				this.btnNextText = 'Вперед'
 			}
 		}
 	}
