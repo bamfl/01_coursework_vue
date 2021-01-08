@@ -30,7 +30,7 @@
         </ul>
         <div v-if="activeIndex < 5">
           <button class="btn" :disabled="activeIndex === 0" @click="prev">Назад</button>
-          <button class="btn primary" @click="nextOrFinish">{{ btnText }}</button>
+          <button class="btn primary" @click="nextOrFinish" autofocus>{{ btnText }}</button>
 				</div>
 				<div v-else>
 					<button class="btn" @click="reset">Начать заново</button>

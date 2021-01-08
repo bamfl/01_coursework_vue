@@ -118,6 +118,10 @@ h3 {
   border-color: #e53935;
 }
 
+.btn:focus {
+	border: 2px solid rgb(5, 89, 9) !important;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1000px;

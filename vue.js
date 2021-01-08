@@ -33,7 +33,10 @@ const App = {
 		reset() {
 			// начать заново
 			this.activeIndex = 0
-    },
+		},
+		keyupEnter(event) {
+			this.nextOrFinish()
+		}
 	},
 	watch: {
 		activeIndex() {
