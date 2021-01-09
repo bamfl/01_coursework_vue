@@ -13,7 +13,8 @@
 
         <div class="steps">
           <div class="steps-content">
-            {{ steps[activeIndex].text }}
+            <div v-if="activeIndex < steps.length">{{ steps[activeIndex].text }}</div>
+            <div v-else>{{ steps[steps.length - 1].text }}</div>
           </div>
           <ul class="steps-list">
             <li
