@@ -13,39 +13,25 @@
 
         <div class="steps">
           <div class="steps-content">
-            <div v-if="activeIndex < steps.length">{{ steps[activeIndex].text }}</div>
-            <div v-else>{{ steps[steps.length - 1].text }}</div>
-          </div>
+						<div v-if="!isFinished">{{ steps[activeIndex].text }}</div>
+						<div v-else>{{ steps[activeIndex - 1].text }}</div>
+					</div>
           <ul class="steps-list">
-            <li
-              :class="{
+						<li 
+							:class="{
 								'steps-item': true,
-								active: idx === activeIndex,
-								done: idx < activeIndex
-							}"
-              v-for="(step, idx) in steps" :key="step"
-              @click="setActive(idx)"
-            >
+								active: activeIndex === idx,
+								done: activeIndex > idx
+							}" 
+							v-for="(step, idx) in steps" :key="step"
+							@click="setActive(idx)"
+						>
               <span>{{ idx + 1 }}</span> {{ step.title }}
             </li>
           </ul>
           <div>
-						<button 
-							v-if="activeIndex < steps.length" 
-							class="btn" :disabled="activeIndex === 0" 
-							@click="prev">
-              {{ btnPrevText }}
-            </button>
-            <button
-              :class="{
-								btn: true,
-								primary: activeIndex < steps.length
-							}"
-              @click="nextOrFinish"
-              autofocus
-            >
-							{{ changeBtnNextText }}
-            </button>
+            <button class="btn" :disabled="prevBtnDisabled" @click="prev">{{ btnPrevTextChange }}</button>
+            <button class="btn primary" @click="nextOfFinish" v-if="!isFinished">{{ btnNextTextChange }}</button>
           </div>
         </div>
       </div>

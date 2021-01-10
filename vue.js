@@ -11,45 +11,45 @@ const App = {
         {title: 'Компоненты', text: 'Один из самых важных блоков в курсе, где вы узнаете все о компонентах. В блоке мы напишем 2 разных приложения и создадим более 5 различных UI компонентов как в реальной разработке. Блок расскажет про абсолютно все составляющие, которые есть в компонентах: взаимодействие, slots, асинхронные и динамические компоненты и тонна примеров.'},
         {title: 'Роутер', text: 'В данном блоке вы узнаете все о том, как работает мультиязычность во Vue. Мы создадим миниклон Gmail в данном блоке, где вы на практике увидите как работать с динамическим роутером.'},
         {title: 'Vuex', text: 'В блоке вы узнаете абсолютно все про Vuex. Вы узнаете как работать с данными, какие есть лучшие практики по их программированию и структурированию. Все на практике.'},
-        {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'}
+        {title: 'Composition', text: 'Одним из наиболее важных обновлений в Vue 3 является появление альтернативного синтаксиса Composition API. В этом блоке вы узнаете все, чтобы полностью пользоваться данными синтаксисом на практических примерах. Помимо этого вы узнаете как работать совместно с Vue Router и Vuex.'},
 			],
-			btnPrevText: 'Назад',
-			btnNextText: 'Вперед'
-		}
+			prevBtnText: '',
+			nextBtnText: ''
+    }
   },
   methods: {
 		setActive(idx) {
+			// когда нажимаем на определенный шаг
 			this.activeIndex = idx
-		},
+    },
     prev() {
 			// когда нажимаем кнопку назад
-			if (this.activeIndex !== 0) {
-				this.activeIndex--
-			}
-    },
-    nextOrFinish() {
+			this.activeIndex !== 0 && !this.isFinished ? this.activeIndex-- : this.activeIndex = 0
+    },  
+    nextOfFinish() {
 			// кнопка вперед или закончить
-			if (this.activeIndex < this.steps.length) {
-				this.activeIndex++
-				console.log(this.activeIndex);
-				console.log(this.steps.length);
-			} else {
-				//reset
-				this.activeIndex = 0
-			}
+			if (!this.isFinished) this.activeIndex++
 		}
-	},
-	computed: {
-		changeBtnNextText() {
-			if (this.steps.length === this.activeIndex + 1) {
-				return this.btnNextText = 'Закончить'
-			} else if (this.steps.length < this.activeIndex + 1) {
-				return this.btnNextText = 'Начать заново'
-			} else {
-				return this.btnNextText = 'Вперед'
-			}
+  },
+  computed: {
+    // тут стоит определить несколько свойств:
+		// 1. выключена ли кнопка назад
+		prevBtnDisabled() {
+			return this.activeIndex === 0 ? true : false
+		},
+		// 2. находимся ли мы на последнем шаге
+		isFinished() {
+			return this.activeIndex === this.steps.length ? true : false
+		},
+		//3. смена текста кнопки далее
+		btnNextTextChange() {
+			return this.activeIndex + 1 !== this.steps.length ? this.nextBtnText = 'Вперед' : this.nextBtnText = 'Завершить'
+		},
+		//4. смена текста кнопки назад
+		btnPrevTextChange() {
+			return this.activeIndex !== this.steps.length ? this.nextBtnText = 'Назад' : this.nextBtnText = 'Начать заново'
 		}
-	}
+  }
 }
 
 Vue.createApp(App).mount('#app')
